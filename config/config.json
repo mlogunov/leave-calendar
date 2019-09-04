@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "leave-calendar-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/leaveCalendar/LeaveCalendarWebPart.js",
+          "manifest": "./src/webparts/leaveCalendar/LeaveCalendarWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "LeaveCalendarWebPartStrings": "lib/webparts/leaveCalendar/loc/{locale}.js"
+  }
+}

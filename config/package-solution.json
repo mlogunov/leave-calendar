@@ -1,0 +1,12 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "leave-calendar-client-side-solution",
+    "id": "83eca8f1-5e9a-4525-9b84-8f82d77e1558",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true
+  },
+  "paths": {
+    "zippedPackage": "solution/leave-calendar.sppkg"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "@microsoft/generator-sharepoint": {
+    "isCreatingSolution": true,
+    "environment": "onprem19",
+    "version": "1.8.2",
+    "libraryName": "leave-calendar",
+    "libraryId": "83eca8f1-5e9a-4525-9b84-8f82d77e1558",
+    "packageManager": "npm",
+    "componentType": "webpart"
+  }
+}
