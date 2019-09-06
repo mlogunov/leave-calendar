@@ -8,7 +8,7 @@ import {
 } from '@microsoft/sp-webpart-base';
 
 import * as strings from 'LeaveCalendarWebPartStrings';
-import LeaveCalendar from './components/LeaveCalendar';
+import LeaveCalendar from './components/LeaveCalendarContainer';
 import { ILeaveCalendarProps } from './components/ILeaveCalendarProps';
 
 export interface ILeaveCalendarWebPartProps {

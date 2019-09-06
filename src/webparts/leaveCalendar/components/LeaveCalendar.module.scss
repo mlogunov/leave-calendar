@@ -1,13 +1,100 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
+:global #workbenchPageContent {
+  // max-width: 1316px;
+  max-width: 100%;
+  left: 0;
+  right: 0;
+
+  &>div {
+      &>div {
+          overflow: visible;
+
+          &>div {
+              overflow: visible;
+              padding: 0;
+
+              .CanvasComponent {
+
+                  .CanvasZone {
+                      margin: auto;
+                      padding-left: 24px;
+                  }
+
+                  .CanvasZone--noMargin {
+                      margin: auto;
+                  }
+
+              }
+          }
+      }
+  }
+
+}
+
+$screen: 1168px;
+
 .leaveCalendar {
   .container {
-    max-width: 700px;
+    min-width: 776px;
+    max-width: 1284px;
     margin: 0px auto;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
   }
-
-  .row {
+  .calendar {
+    width: 100%;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  
+  .cRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    &>div{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-left: 1px solid rgb(243, 242, 241);
+      border-bottom: 1px solid  rgb(243, 242, 241);
+    }
+    .cDatePicker{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .cHeader{
+      font-weight: normal;
+    }
+    .cTitle{
+      padding: 5px;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .cCell{
+      flex-basis: 24px;
+      padding: 5px 0;
+      flex-grow: 1;   
+    }
+    .cPosition{
+      font-size: 0.8em;
+      color: #c0c0c0;
+    }
+    @media all and (max-width: $screen){
+      .cTitle{
+        flex-basis: 100%;
+      }
+    }
+    @media all and (min-width: $screen){
+      .cTitle{
+        flex-basis: 300px;
+      }
+    }
+  }
+  
+  /*.row {
     @include ms-Grid-row;
     @include ms-fontColor-white;
     background-color: $ms-color-themeDark;
@@ -70,5 +157,5 @@
       vertical-align: top;
       display: inline-block;
     }
-  }
+  }*/
 }
