@@ -1,3 +1,4 @@
 export interface ILeaveCalendarComponentProps{
-    date: Date
+    date: Date;
+    onDateChange(date: Date): void;
 }

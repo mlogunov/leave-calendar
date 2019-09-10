@@ -1,0 +1,26 @@
+.cDatePicker {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    &>div{
+        display: flex;
+        align-items: center;
+    }
+    .cDate{
+        flex-direction: column;
+        align-items: flex-start;
+        .cDateYear{
+            font-size: 0.8em;
+            color: #c0c0c0;
+        }
+    }
+    .cChevron{
+        font-size: 1.5em;
+        margin-left: 20px;
+        color: blue;
+    }
+    .cChevron:hover{
+        cursor: pointer;
+    }
+  }
