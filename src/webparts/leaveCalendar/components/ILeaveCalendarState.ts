@@ -1,3 +1,6 @@
+import { IListItemCollection } from "./IListItem";
+
 export interface ILeaveCalendarState {
-    date: Date
+    date: Date;
+    items: IListItemCollection;
 }

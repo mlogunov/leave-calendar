@@ -5,7 +5,7 @@ import styles from './DatePicker.module.scss'
 import * as strings from 'LeaveCalendarWebPartStrings';
 import { IconButton, IIconProps } from 'office-ui-fabric-react';
 
-export const DatePicker: React.StatelessComponent<IDatePickerProps> = (props: IDatePickerProps) => {
+export const DatePicker: React.StatelessComponent<IDatePickerProps> = (props: IDatePickerProps): React.ReactElement<IDatePickerProps> => {
     const chevronLeftIcon: IIconProps = { iconName: 'ChevronLeft' };
     const chevronRightIcon: IIconProps = { iconName: 'ChevronRight' };
     const month: number = props.date.getMonth();
@@ -18,10 +18,10 @@ export const DatePicker: React.StatelessComponent<IDatePickerProps> = (props: ID
         month == 11 ? 0 : month + 1
     )
     return (
-        <div className={styles.cDatePicker}>
-            <div className={styles.cDate}>
+        <div className={styles.calendarDatePicker}>
+            <div className={styles.calendarDate}>
                 <span>{strings.Month[month]}</span>
-                <span className={styles.cDateYear}>{props.date.getFullYear()}</span>
+                <span className={styles.calendarDateYear}>{props.date.getFullYear()}</span>
             </div>
             <div>
                 <IconButton iconProps={chevronLeftIcon} title={strings.Month[prevDate.getMonth()]} onClick={() => props.onDateChange(prevDate)} />

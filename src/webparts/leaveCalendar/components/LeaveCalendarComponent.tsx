@@ -1,43 +1,50 @@
 import * as React from 'react';
 import styles from './LeaveCalendar.module.scss';
+import * as strings from 'LeaveCalendarWebPartStrings';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { ILeaveCalendarComponentProps } from './ILeaveCalendarComponentProps';
 import { DatePicker } from './datepicker/DatePicker';
+import { Persona, PersonaSize, Image, IPersonaProps } from 'office-ui-fabric-react';
+import { IListItem } from './IListItem';
+import { CalendarCell } from './calendarCell/CalendarCell';
 
-export const LeaveCalendarComponent: React.StatelessComponent<ILeaveCalendarComponentProps> = (props: ILeaveCalendarComponentProps) => {
+export const LeaveCalendarComponent: React.StatelessComponent<ILeaveCalendarComponentProps> = (props: ILeaveCalendarComponentProps): React.ReactElement<ILeaveCalendarComponentProps> => {
     let days:JSX.Element[] = [];
-    let cells:JSX.Element[] = [];
     const daysInMonth: number = new Date(props.date.getFullYear(), props.date.getMonth() + 1, 0).getDate();
     for(let i: number = 1; i <= daysInMonth; i++){
-        days.push(<div className={[styles.cCell, styles.cHeader].join(' ')} key={i}>
-                    {new Date().setHours(0,0,0,0) == new Date(props.date.getFullYear(), props.date.getMonth(), i).getTime() ? <span><b>{i}</b></span>:<span>{i}</span>}
-                </div>);
-        cells.push(<div className={styles.cCell} key={i}></div>);
+        const day: number = new Date(props.date.getFullYear(), props.date.getMonth(), i).getDay();
+        const weekend: boolean = day == 6 || day == 0;
+        days.push(<CalendarCell key={i} value={strings.ShortDays[day]} weekend={weekend} className={styles.calendarCell}/>);
     }
+    const rows: JSX.Element[] = props.items.value.map((item: IListItem): JSX.Element => {
+        let cells:JSX.Element[] = [];
+        for(let i: number = 1; i <= daysInMonth; i++){
+            const day: number = new Date(props.date.getFullYear(), props.date.getMonth(), i).getDay();
+            const weekend: boolean = day == 6 || day == 0;
+            cells.push(<CalendarCell {...item.leaveType} key={i} className={styles.calendarCell} value={i} weekend={weekend} />);
+        }
+        return (
+            <div className={styles.calendarRow} key={item.id}>
+                <div>
+                <Persona {...item.persona} size={PersonaSize.size32} showSecondaryText={true} />
+                </div>
+                
+                {cells}
+            </div>
+        );
+    });
+    
 
     return (
-        <div className = { styles.leaveCalendar } >
+        <div className={styles.leaveCalendar}>
             <div className={styles.container}>
                 <div>{/* Контейнер для фильтров */}</div>
-                <div className={styles.calendar}>
-                    <div className={styles.cRow}>
-                        <div className={[styles.cHeader, styles.cTitle].join(' ')}>
-                            <DatePicker date={props.date} onDateChange={props.onDateChange} />
-                        </div>
+                <div>
+                    <div className={styles.calendarRow}>
+                        <DatePicker date={props.date} onDateChange={props.onDateChange} />
                         {days}
                     </div>
-                    <div className={styles.cRow}>
-                        <div className={styles.cTitle}>Марушев Валерий Вячеславович<br /><span className={styles.cPosition}>Начальник управления</span></div>
-                        {cells}
-                    </div>
-                    <div className={styles.cRow}>
-                        <div className={styles.cTitle}>Орешин Антон Сергеевич<br /><span className={styles.cPosition}>Заместитель начальника управления</span></div>
-                        {cells}
-                    </div>
-                    <div className={styles.cRow}>
-                        <div className={styles.cTitle}>Логунов Максим Владимирович<br /><span className={styles.cPosition}>Старший разработчик</span></div>
-                        {cells}
-                    </div>
+                    {rows}
                 </div>
             </div>
         </div >

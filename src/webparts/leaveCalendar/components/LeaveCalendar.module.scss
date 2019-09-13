@@ -45,8 +45,40 @@ $screen: 1168px;
     width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.2);
   }
-  
-  .cRow {
+  .calendarRow {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+    &>div{
+      box-sizing: border-box;
+      border-left: 1px solid rgb(243, 242, 241);
+      border-bottom: 1px solid  rgb(243, 242, 241);
+    }
+    &>div:first-child{
+      padding: 5px;
+    }
+    .calendarCell{
+      flex-basis: 24px;
+      flex-grow: 1; 
+      display: flex;
+      justify-content: center;
+      align-items: center;  
+    }
+    @media all and (max-width: $screen){
+      &>div:first-child{
+        flex-basis: 100%;
+      }
+    }
+    @media all and (min-width: $screen){
+      &>div:first-child{
+        flex-basis: 300px;
+        max-width: 300px;
+      }
+    }
+  }
+}/*
+  .calendarRow {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -59,33 +91,16 @@ $screen: 1168px;
       border-left: 1px solid rgb(243, 242, 241);
       border-bottom: 1px solid  rgb(243, 242, 241);
     }
-    .cHeader{
+    .calendarHeader{
       font-weight: normal;
     }
-    .cTitle{
-      padding: 5px;
-      justify-content: center;
-      align-items: flex-start;
-    }
-    .cCell{
+    .calendarCell{
       flex-basis: 24px;
       padding: 5px 0;
       flex-grow: 1;   
     }
-    .cPosition{
-      font-size: 0.8em;
-      color: #c0c0c0;
-    }
-    @media all and (max-width: $screen){
-      .cTitle{
-        flex-basis: 100%;
-      }
-    }
-    @media all and (min-width: $screen){
-      .cTitle{
-        flex-basis: 300px;
-      }
-    }
+
+    
   }
   
   /*.row {
@@ -151,5 +166,5 @@ $screen: 1168px;
       vertical-align: top;
       display: inline-block;
     }
-  }*/
-}
+  }
+}*/
