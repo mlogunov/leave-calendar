@@ -1,7 +1,7 @@
-import { ILeaveType } from "../ILeaveType";
+import { ILeaveType } from "../../model/ILeaveType";
 
-export interface ICalendarCellProps extends ILeaveType {
-    className?: string;
+export interface ICalendarCellProps{
     value: number | string;
     weekend: boolean;
+    leaveType?: ILeaveType;
 };

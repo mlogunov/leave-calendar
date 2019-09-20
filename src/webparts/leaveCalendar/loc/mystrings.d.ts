@@ -2,8 +2,10 @@ declare interface ILeaveCalendarWebPartStrings {
   PropertyPaneDescription: string;
   BasicGroupName: string;
   DescriptionFieldLabel: string;
-  Month: string[];
+  Months: string[];
   ShortDays: string[];
+  Days: string[];
+  NoResultsMessage: string;
 }
 
 declare module 'LeaveCalendarWebPartStrings' {

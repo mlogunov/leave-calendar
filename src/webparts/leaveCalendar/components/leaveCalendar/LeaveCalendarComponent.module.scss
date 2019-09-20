@@ -58,13 +58,6 @@ $screen: 1168px;
     &>div:first-child{
       padding: 5px;
     }
-    .calendarCell{
-      flex-basis: 24px;
-      flex-grow: 1; 
-      display: flex;
-      justify-content: center;
-      align-items: center;  
-    }
     @media all and (max-width: $screen){
       &>div:first-child{
         flex-basis: 100%;
@@ -76,6 +69,10 @@ $screen: 1168px;
         max-width: 300px;
       }
     }
+  }
+  .spinner {
+    padding: 20px;
+    text-align: center;
   }
 }/*
   .calendarRow {

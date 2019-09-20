@@ -1,0 +1,12 @@
+
+.calendarCell{
+    flex-basis: 24px;
+    flex-grow: 1; 
+    &>div{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

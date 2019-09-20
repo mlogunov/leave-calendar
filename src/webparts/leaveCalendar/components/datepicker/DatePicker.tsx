@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { IDatePickerProps } from './IDatePickerProps';
 //import styles from '../LeaveCalendar.module.scss';
-import styles from './DatePicker.module.scss'
+import styles from './DatePicker.module.scss';
 import * as strings from 'LeaveCalendarWebPartStrings';
 import { IconButton, IIconProps } from 'office-ui-fabric-react';
 
@@ -20,12 +20,12 @@ export const DatePicker: React.StatelessComponent<IDatePickerProps> = (props: ID
     return (
         <div className={styles.calendarDatePicker}>
             <div className={styles.calendarDate}>
-                <span>{strings.Month[month]}</span>
+                <span>{strings.Months[month]}</span>
                 <span className={styles.calendarDateYear}>{props.date.getFullYear()}</span>
             </div>
             <div>
-                <IconButton iconProps={chevronLeftIcon} title={strings.Month[prevDate.getMonth()]} onClick={() => props.onDateChange(prevDate)} />
-                <IconButton iconProps={chevronRightIcon} title={strings.Month[nextDate.getMonth()]} onClick={() => props.onDateChange(nextDate)} />
+                <IconButton iconProps={chevronLeftIcon} title={strings.Months[prevDate.getMonth()]} onClick={() => props.onDateChange(prevDate)} />
+                <IconButton iconProps={chevronRightIcon} title={strings.Months[nextDate.getMonth()]} onClick={() => props.onDateChange(nextDate)} />
             </div>           
         </div> 
     );
