@@ -41,6 +41,14 @@ $screen: 1168px;
     margin: 0px auto;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
   }
+  .commandBar{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    width: auto;
+    height: 44px;
+    padding: 5px;
+  }
   .calendar {
     width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -73,6 +81,15 @@ $screen: 1168px;
   .spinner {
     padding: 20px;
     text-align: center;
+  }
+  button{
+    background-color: $ms-color-white;
+  }
+  button:hover{
+    background-color: #f4f4f4;
+  }
+  button:active{
+    background-color: #c8c8c8;
   }
 }/*
   .calendarRow {

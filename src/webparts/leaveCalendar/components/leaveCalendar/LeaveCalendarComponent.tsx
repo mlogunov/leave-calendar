@@ -4,13 +4,15 @@ import * as strings from 'LeaveCalendarWebPartStrings';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { ILeaveCalendarComponentProps } from './ILeaveCalendarComponentProps';
 import { DatePicker } from '../datepicker/DatePicker';
-import { Persona, PersonaSize, Image, IPersonaProps, Spinner, SpinnerSize } from 'office-ui-fabric-react';
+import { Persona, PersonaSize, Image, IPersonaProps, Spinner, SpinnerSize, CommandBarButton } from 'office-ui-fabric-react';
 import { CalendarCell } from '../calendarCell/CalendarCell';
 import { ILeaveCalendarItem } from './ILeaveCalendarItem';
 import * as _ from 'lodash';
 import { ILeaveType } from '../../model/ILeaveType';
+import { FormPanel } from '../panel/FormPanel';
 
 export const LeaveCalendarComponent: React.StatelessComponent<ILeaveCalendarComponentProps> = (props: ILeaveCalendarComponentProps): React.ReactElement<ILeaveCalendarComponentProps> => {
+
     let days:JSX.Element[] = [];
     let rows: JSX.Element[] = [];
     const daysInMonth: number = new Date(props.date.getFullYear(), props.date.getMonth() + 1, 0).getDate();
@@ -67,7 +69,9 @@ export const LeaveCalendarComponent: React.StatelessComponent<ILeaveCalendarComp
     return (
         <div className={styles.leaveCalendar}>
             <div className={styles.container}>
-                <div>{/* Контейнер для фильтров */}</div>
+                <div className={styles.commandBar}>
+                    <CommandBarButton iconProps={{iconName: 'Add'}} text={strings.NewItemText} onClick={props.onShowPanel} />
+                </div>
                 <div>
                     <div className={styles.calendarRow}>
                         <DatePicker date={props.date} onDateChange={props.onDateChange} />
@@ -75,6 +79,14 @@ export const LeaveCalendarComponent: React.StatelessComponent<ILeaveCalendarComp
                     </div>
                     {rows}
                 </div>
+                <FormPanel 
+                    showPanel={props.showPanel} 
+                    leaveTypes={props.leaveTypes} 
+                    onHidePanel={props.onHidePanel} 
+                    onSubmit={props.onSubmitPanel} 
+                    onDataChange={props.onFormDataChange}
+                    value={props.formValue}
+                    isValid={props.isFormValid} />
             </div>
         </div >
     );

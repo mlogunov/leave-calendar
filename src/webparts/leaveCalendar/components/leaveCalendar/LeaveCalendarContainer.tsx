@@ -9,6 +9,8 @@ import { ILeaveCalendarItem } from './ILeaveCalendarItem';
 import * as _ from 'lodash';
 import { IEmployee } from '../../model/IEmployee';
 import { ILeaveType } from '../../model/ILeaveType';
+import { IFormFields } from '../../model/IFormFields';
+import { IPeriod } from '../../model/IPeriod';
 
 export default class LeaveCalendar extends React.Component < ILeaveCalendarProps, ILeaveCalendarState > {
   private _leaveTypes: ILeaveType[] = [];
@@ -17,12 +19,50 @@ export default class LeaveCalendar extends React.Component < ILeaveCalendarProps
     this.state = {
         date: new Date(),
         items: [],
-        loading: false
+        loading: false,
+        showPanel: false,
+        formData: {dateFrom: null, dateTo: null, leaveTypeId: null},
+        isFormValid: true
       }
-    this.onDateChanged = this.onDateChanged.bind(this);
+    this._onDateChanged = this._onDateChanged.bind(this);
+    this._onFormDataChange = this._onFormDataChange.bind(this);
+    this._showPanel = this._showPanel.bind(this);
+    this._hidePanel = this._hidePanel.bind(this);
+    this._onSubmitPanel = this._onSubmitPanel.bind(this);
   }
-  private onDateChanged(newDate: Date): void {
+
+  private _onDateChanged(newDate: Date): void {
     this.setState({date: newDate});
+  }
+  private _onFormDataChange(value: Date | number, field: IFormFields): void{
+    switch(field){
+      case IFormFields.dateFrom:
+        this.setState((prevState, props)=>{
+          return {formData: {dateFrom: value, dateTo: prevState.formData.dateTo, leaveTypeId: prevState.formData.leaveTypeId}}
+        });
+        break;
+      case IFormFields.dateTo:
+        this.setState((prevState, props)=>{
+          return {formData: {dateFrom: prevState.formData.dateFrom, dateTo: value, leaveTypeId: prevState.formData.leaveTypeId}}
+        });
+        break;
+      case IFormFields.leaveType:
+        this.setState((prevState, props)=>{
+          return {formData: {dateFrom: prevState.formData.dateFrom, dateTo: prevState.formData.dateTo, leaveTypeId: value}}
+        });
+        break;
+    }
+  }
+  private _showPanel(): void {
+    this.setState({showPanel: true})
+  }
+  private _hidePanel(): void {
+    this.setState({showPanel: false})
+  }
+  private _onSubmitPanel(): void {
+    const formData: IPeriod = this.state.formData;
+    const isValid = Object.keys(formData).every((key: string)=>formData[key] !== null);
+    this.setState({isFormValid: isValid})
   }
   private async _getMockListData(): Promise<IListItem[]> {
     let _results;
@@ -99,13 +139,21 @@ export default class LeaveCalendar extends React.Component < ILeaveCalendarProps
 
   }
   public render(): React.ReactElement<ILeaveCalendarProps> {
+    console.log(this.state)
     return(
       <LeaveCalendarComponent 
         date={this.state.date}
-        onDateChange = {this.onDateChanged}
+        onDateChange = {this._onDateChanged}
         items = {this.state.items}
         leaveTypes = {this._leaveTypes}
         loading = {this.state.loading}
+        showPanel = {this.state.showPanel}
+        onShowPanel = {this._showPanel}
+        onHidePanel = {this._hidePanel}
+        onSubmitPanel = {this._onSubmitPanel}
+        onFormDataChange = {this._onFormDataChange}
+        formValue = {this.state.formData}
+        isFormValid = {this.state.isFormValid}
       />
     );
   }
