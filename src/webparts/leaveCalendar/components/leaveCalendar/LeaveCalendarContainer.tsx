@@ -11,6 +11,7 @@ import { IEmployee } from '../../model/IEmployee';
 import { ILeaveType } from '../../model/ILeaveType';
 import { IFormFields } from '../../model/IFormFields';
 import { IPeriod } from '../../model/IPeriod';
+import { sp } from "@pnp/sp";
 
 export default class LeaveCalendar extends React.Component < ILeaveCalendarProps, ILeaveCalendarState > {
   private _leaveTypes: ILeaveType[] = [];
@@ -64,19 +65,6 @@ export default class LeaveCalendar extends React.Component < ILeaveCalendarProps
     const isValid = Object.keys(formData).every((key: string)=>formData[key] !== null);
     this.setState({isFormValid: isValid})
   }
-  private async _getMockListData(): Promise<IListItem[]> {
-    let _results;
-    try
-    {
-      _results = await MockHttpClient.getItems();
-      return _results;
-    }
-    catch(error)
-    {
-      console.dir(error);
-      Promise.reject(error);
-    }
-  }
 
   private async _getLeaveTypes(): Promise<ILeaveType[]> {
     let _results;
@@ -91,15 +79,34 @@ export default class LeaveCalendar extends React.Component < ILeaveCalendarProps
       Promise.reject(error);
     }
   }
-  /*
-  private _getLeaveCalendatListData(): Promise<IListItemCollection> {
-    return MockHttpClient.getItems()
-      .then((data: IListItem[]) => {
-        const listData: IListItemCollection = { value: data };
-        return listData;
-      }) as Promise<IListItemCollection>;
+  
+  private async _getMockListData(): Promise<IListItem[]> {
+    let _results;
+    try
+    {
+      _results = await MockHttpClient.getItems();
+      return _results;
+    }
+    catch(error)
+    {
+      console.dir(error);
+      Promise.reject(error);
+    }
   }
- */
+
+  /*private async _getLeaveCalendatListData(): Promise<IListItem[]> {
+    let _results;
+    try
+    {
+      _results = await sp.web.lists.getByTitle('LeaveCalendar').items
+    }
+    catch(error)
+    {
+      console.dir(error);
+      Promise.reject(error);
+    }
+  }*/
+ 
   private async _getEmployeeById(employeeId: number): Promise<IEmployee> {
     return await MockHttpClient.getEmployeeById(employeeId);
   }
