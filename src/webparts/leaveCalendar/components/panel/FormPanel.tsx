@@ -33,7 +33,7 @@ export const FormPanel: React.StatelessComponent<IFormPanelProps> = (props: IFor
     const _onRenderFooterContent = () => {
         return (
           <div>
-            <PrimaryButton style={{ marginRight: '8px' }} onClick={props.onSubmit}>
+            <PrimaryButton style={{ marginRight: '8px' }} onClick={props.onSubmit} disabled={props.isSubmitButtonDisabled}>
                 {strings.SaveButtonText}
             </PrimaryButton>
             <DefaultButton onClick={props.onHidePanel}>
@@ -59,7 +59,8 @@ export const FormPanel: React.StatelessComponent<IFormPanelProps> = (props: IFor
                         showGoToToday={false}
                         onSelectDate={(date: Date) =>props.onDataChange(date, IFormFields.dateFrom)}
                         value={props.value.dateFrom}
-                        maxDate={props.value.dateTo}  />
+                        maxDate={props.value.dateTo} 
+                        firstDayOfWeek = {DayOfWeek.Monday} />
                     <br />
                     <Label required={true}>{strings.EndDateLabelText}</Label>
                     <DatePicker 
@@ -71,7 +72,8 @@ export const FormPanel: React.StatelessComponent<IFormPanelProps> = (props: IFor
                         showGoToToday={false}
                         onSelectDate={(date: Date) =>props.onDataChange(date, IFormFields.dateTo)}
                         value={props.value.dateTo}
-                        minDate={props.value.dateFrom} />
+                        minDate={props.value.dateFrom}
+                        firstDayOfWeek = {DayOfWeek.Monday} />
                     <br />
                     <Label required={true}>{strings.LeaveTypeLabelText}</Label>
                     <Dropdown 

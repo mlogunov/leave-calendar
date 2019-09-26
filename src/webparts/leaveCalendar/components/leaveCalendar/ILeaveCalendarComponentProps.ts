@@ -1,6 +1,5 @@
 import { ILeaveCalendarItem } from "./ILeaveCalendarItem";
 import { ILeaveType } from "../../model/ILeaveType";
-import { FormEvent } from "react";
 import { IFormFields } from "../../model/IFormFields";
 import { IPeriod } from "../../model/IPeriod";
 
@@ -17,4 +16,5 @@ export interface ILeaveCalendarComponentProps{
     onFormDataChange(value: Date | number, field: IFormFields): void;
     formValue: IPeriod;
     isFormValid: boolean;
+    isFormSubmitButtonDisabled: boolean;
 }

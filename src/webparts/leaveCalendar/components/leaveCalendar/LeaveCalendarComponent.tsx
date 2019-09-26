@@ -86,7 +86,8 @@ export const LeaveCalendarComponent: React.StatelessComponent<ILeaveCalendarComp
                     onSubmit={props.onSubmitPanel} 
                     onDataChange={props.onFormDataChange}
                     value={props.formValue}
-                    isValid={props.isFormValid} />
+                    isValid={props.isFormValid}
+                    isSubmitButtonDisabled={props.isFormSubmitButtonDisabled} />
             </div>
         </div >
     );

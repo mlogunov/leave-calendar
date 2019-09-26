@@ -8,4 +8,5 @@ export interface ILeaveCalendarState {
     showPanel: boolean;
     formData: IPeriod;
     isFormValid: boolean;
+    isFormSubmitButtonDisabled: boolean;
 }

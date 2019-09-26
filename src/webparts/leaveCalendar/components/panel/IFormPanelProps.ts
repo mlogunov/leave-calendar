@@ -11,4 +11,5 @@ export interface IFormPanelProps {
     onDataChange(value: Date | number, field: IFormFields): void;
     value: IPeriod;
     isValid: boolean;
+    isSubmitButtonDisabled: boolean;
 }
