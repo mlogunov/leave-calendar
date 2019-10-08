@@ -47,7 +47,8 @@ export const FormPanel: React.StatelessComponent<IFormPanelProps> = (props: IFor
                 isOpen = {props.showPanel} 
                 type= {PanelType.smallFixedFar} 
                 headerText={strings.FormPanelHeaderText}
-                onRenderFooterContent={_onRenderFooterContent} >
+                onRenderFooterContent={_onRenderFooterContent}
+                onDismissed= {props.onHidePanel} >
                     {!props.isValid && <MessageBar messageBarType={MessageBarType.severeWarning}>{strings.RequiredErrorMessage}</MessageBar> }                
                     <Label required={true}>{strings.StartDateLabelText}</Label>
                     <DatePicker 

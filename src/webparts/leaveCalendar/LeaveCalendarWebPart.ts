@@ -10,12 +10,22 @@ import {
 import * as strings from 'LeaveCalendarWebPartStrings';
 import LeaveCalendar from './components/leaveCalendar/LeaveCalendarContainer';
 import { ILeaveCalendarProps } from './components/leaveCalendar/ILeaveCalendarProps';
+import {sp} from '@pnp/sp';
 
 export interface ILeaveCalendarWebPartProps {
   description: string;
 }
 
 export default class LeaveCalendarWebPart extends BaseClientSideWebPart<ILeaveCalendarWebPartProps> {
+
+  protected onInit(): Promise<void> {
+    return super.onInit().then(_ => {
+      sp.setup({
+        spfxContext: this.context
+      })
+    })
+  }
+
 
   public render(): void {
     const element: React.ReactElement<ILeaveCalendarProps > = React.createElement(

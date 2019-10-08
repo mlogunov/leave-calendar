@@ -39,7 +39,6 @@ $screen: 1168px;
     min-width: 776px;
     max-width: 1284px;
     margin: 0px auto;
-    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
   }
   .commandBar{
     display: flex;
@@ -47,11 +46,15 @@ $screen: 1168px;
     flex-wrap: nowrap;
     width: auto;
     height: 44px;
-    padding: 5px;
+    padding: 5px 0;
   }
   .calendar {
     width: 100%;
     border: 1px solid rgba(0, 0, 0, 0.2);
+  }
+  .calendarBody{
+    border-top: 1px solid  rgb(243, 242, 241);
+    border-right: 1px solid  rgb(243, 242, 241);
   }
   .calendarRow {
     display: flex;

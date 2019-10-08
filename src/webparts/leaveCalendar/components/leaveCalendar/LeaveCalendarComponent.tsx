@@ -72,7 +72,7 @@ export const LeaveCalendarComponent: React.StatelessComponent<ILeaveCalendarComp
                 <div className={styles.commandBar}>
                     <CommandBarButton iconProps={{iconName: 'Add'}} text={strings.NewItemText} onClick={props.onShowPanel} />
                 </div>
-                <div>
+                <div className={styles.calendarBody}>
                     <div className={styles.calendarRow}>
                         <DatePicker date={props.date} onDateChange={props.onDateChange} />
                         {days}

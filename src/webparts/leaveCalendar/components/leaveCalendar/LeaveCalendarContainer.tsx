@@ -13,7 +13,6 @@ import { IFormFields } from '../../model/IFormFields';
 import { IPeriod } from '../../model/IPeriod';
 import "@pnp/polyfill-ie11";
 import { sp, ItemAddResult } from "@pnp/sp";
-import { SiteUser } from '@pnp/sp/src/siteusers';
 
 export default class LeaveCalendar extends React.Component < ILeaveCalendarProps, ILeaveCalendarState > {
   private _leaveTypes: ILeaveType[] = [];

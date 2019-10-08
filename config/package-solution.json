@@ -4,7 +4,22 @@
     "name": "leave-calendar-client-side-solution",
     "id": "83eca8f1-5e9a-4525-9b84-8f82d77e1558",
     "version": "1.0.0.0",
-    "includeClientSideAssets": true
+    "includeClientSideAssets": true,
+    "features": [{
+      "title": "asset-deployment-leave-calendar-client-side-solution",
+      "description": "asset-deployment-leave-calendar-client-side-solution",
+      "id": "548f5922-d0d8-4a3e-a44e-cf1c4b0547ea",
+      "version": "1.0.0.0",
+      "assets": {
+        "elementManifests": [
+          "elements.xml"
+        ],
+        "elementFiles":[
+          "schemaLeaveTypes.xml",
+          "schemaLeaveCalendar.xml"
+        ]
+      }
+    }]
   },
   "paths": {
     "zippedPackage": "solution/leave-calendar.sppkg"
