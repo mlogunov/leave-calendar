@@ -1,0 +1,71 @@
+[33mcommit 67000137d6e98f14f7ee8bfbed0efa74dbc60086[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m, [m[1;31morigin/dev[m[33m)[m
+Author: Maxim Logunov <m.logunov@outlook.com>
+Date:   Tue Oct 8 18:20:59 2019 +0300
+
+    installed rush-stack-compiler-3.3
+
+[33mcommit 072a484f613f23e6809ca9f215f1e48ecff0705a[m
+Author: Maxim Logunov <m.logunov@outlook.com>
+Date:   Tue Oct 8 17:15:42 2019 +0300
+
+    Updated to SPFx 1.9.1
+
+[33mcommit 8f3b5e4f4d726b4cfc23d7a146a363de398b77ab[m
+Author: Maxim Logunov <m.logunov@outlook.com>
+Date:   Tue Oct 8 13:39:32 2019 +0300
+
+    change styles
+
+[33mcommit 7be727b1958dd49d335d13a0a49e3cf5555e8dca[m
+Author: Maxim Logunov <m.logunov@outlook.com>
+Date:   Thu Sep 26 14:46:41 2019 +0300
+
+    Added EnvironmentType.SharePoint
+
+[33mcommit f9df42163c6077e32204bb6c2f8a8be6e18d4e54[m
+Author: Maxim Logunov <m.logunov@outlook.com>
+Date:   Wed Sep 25 14:12:04 2019 +0300
+
+    Added @pnp/polyfill-ie11
+
+[33mcommit 195fad2eda5c63028b30df5e12d7d1610346c368[m
+Author: Maxim Logunov <m.logunov@outlook.com>
+Date:   Wed Sep 25 12:48:49 2019 +0300
+
+    Added NewForm
+
+[33mcommit 081e2f2dae4cc42bd48878dcb8020f44f3625a5a[m
+Author: Maxim Logunov <m.logunov@outlook.com>
+Date:   Fri Sep 20 10:32:48 2019 +0300
+
+    Added spinner
+
+[33mcommit 14400cd2adf9940ee963376af5c574b3e77bfd57[m
+Author: Maxim Logunov <m.logunov@outlook.com>
+Date:   Fri Sep 13 15:16:06 2019 +0300
+
+    Added CalendarCell Component
+
+[33mcommit 08015cf79d7cba1d4a5a4ecd636d376b6cf66fa4[m
+Author: Maxim Logunov <m.logunov@outlook.com>
+Date:   Tue Sep 10 12:08:34 2019 +0300
+
+    Added DatePicker
+
+[33mcommit 0b87e0fc0b17b618901e1f6dff34e3e0b2c2bbf1[m
+Author: Maxim Logunov <m.logunov@outlook.com>
+Date:   Fri Sep 6 15:44:20 2019 +0300
+
+    Add Calendar Component layout
+
+[33mcommit a624f6cf0cb20eaae15b8dae89f1d965a07ea557[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Maxim Logunov <m.logunov@outlook.com>
+Date:   Wed Sep 4 12:17:31 2019 +0300
+
+    Create a new project
+
+[33mcommit a239658209fea66dd065fedcc5285e0af4668afb[m
+Author: Maxim Logunov <m.logunov@outlook.com>
+Date:   Wed Sep 4 10:40:31 2019 +0300
+
+    Initial commit

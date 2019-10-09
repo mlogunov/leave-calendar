@@ -18,7 +18,7 @@
     "group": { "default": "Other" },
     "title": { "default": "Leave Calendar" },
     "description": { "default": "Employee Leave Calendar" },
-    "officeFabricIconFontName": "Page",
+    "officeFabricIconFontName": "CalendarAgenda",
     "properties": {
       "description": "Leave Calendar"
     }

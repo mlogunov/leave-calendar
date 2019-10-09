@@ -31,6 +31,22 @@
   }
 
 }
+/*Fix Bugs*/
+:global .ms-DatePicker {
+  /*Fix Scroll Bar*/
+  @media all and (min-device-width:460px){
+    .ms-DatePicker-holder {
+      height: 250px;
+    }
+  }
+  /*Fix Icons*/
+  .ms-Icon[data-icon-name="Up"] {
+    font-family: "FabricMDL2Icons-0";
+  }
+  .ms-Icon[data-icon-name="Down"] {
+    font-family: "FabricMDL2Icons-0";
+  }
+}
 
 $screen: 1168px;
 
