@@ -1,11 +1,10 @@
 import * as React from 'react';
-import { IDatePickerProps } from './IDatePickerProps';
-//import styles from '../LeaveCalendar.module.scss';
-import styles from './DatePicker.module.scss';
+import { IMonthPickerProps } from './IMonthPickerProps';
+import styles from './MonthPicker.module.scss';
 import * as strings from 'LeaveCalendarWebPartStrings';
 import { IconButton, IIconProps } from 'office-ui-fabric-react';
 
-export const DatePicker: React.StatelessComponent<IDatePickerProps> = (props: IDatePickerProps): React.ReactElement<IDatePickerProps> => {
+export const MonthPicker: React.StatelessComponent<IMonthPickerProps> = (props: IMonthPickerProps): React.ReactElement<IMonthPickerProps> => {
     const chevronLeftIcon: IIconProps = { iconName: 'ChevronLeft' };
     const chevronRightIcon: IIconProps = { iconName: 'ChevronRight' };
     const month: number = props.date.getMonth();

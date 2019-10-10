@@ -3,12 +3,12 @@ import styles from './LeaveCalendarComponent.module.scss';
 import * as strings from 'LeaveCalendarWebPartStrings';
 import { escape } from '@microsoft/sp-lodash-subset';
 import { ILeaveCalendarComponentProps } from './ILeaveCalendarComponentProps';
-import { DatePicker } from '../datepicker/DatePicker';
+import { MonthPicker } from '../monthPicker/MonthPicker';
 import { Persona, PersonaSize, Image, IPersonaProps, Spinner, SpinnerSize, CommandBarButton } from 'office-ui-fabric-react';
 import { CalendarCell } from '../calendarCell/CalendarCell';
 import { ILeaveCalendarItem } from './ILeaveCalendarItem';
 import * as _ from 'lodash';
-import { ILeaveType } from '../../model/ILeaveType';
+import { ILeaveType } from '../../../../models/ILeaveType';
 import { FormPanel } from '../panel/FormPanel';
 
 export const LeaveCalendarComponent: React.StatelessComponent<ILeaveCalendarComponentProps> = (props: ILeaveCalendarComponentProps): React.ReactElement<ILeaveCalendarComponentProps> => {
@@ -74,7 +74,7 @@ export const LeaveCalendarComponent: React.StatelessComponent<ILeaveCalendarComp
                 </div>
                 <div className={styles.calendarBody}>
                     <div className={styles.calendarRow}>
-                        <DatePicker date={props.date} onDateChange={props.onDateChange} />
+                        <MonthPicker date={props.date} onDateChange={props.onDateChange} />
                         {days}
                     </div>
                     {rows}

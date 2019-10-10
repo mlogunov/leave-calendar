@@ -3,17 +3,21 @@
     <ContentTypes>
       <ContentType ID="0x01">
         <FieldRefs>
+          <FieldRef Name="Title"/>
           <FieldRef Name="BgColor"/>
         </FieldRefs>
       </ContentType>
     </ContentTypes>
     <Fields>
+      <Field  ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" 
+              Name="Title" 
+              Type="Text" 
+              Required="TRUE" />
       <Field  ID="{5586D22B-C872-4A61-B9FF-73A99CB8E478}"
               Type="Text"
               Name="BgColor"
               DisplayName="Backgroud Color"
-              Required="TRUE">
-      </Field>
+              Required="TRUE" />
     </Fields>
     <Views>
       <View BaseViewID="1" Type="HTML" WebPartZoneID="Main" DisplayName="$Resources:core,objectiv_schema_mwsidcamlidC24;" DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" SetupPath="pages\viewpage.aspx" ImageUrl="/_layouts/images/generic.png" Url="AllItems.aspx">

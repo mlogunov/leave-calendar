@@ -1,4 +1,4 @@
-export interface IDatePickerProps {
+export interface IMonthPickerProps {
     date: Date;
     onDateChange(date: Date): void;
 }

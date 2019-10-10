@@ -1,7 +1,7 @@
 import { ILeaveCalendarItem } from "./ILeaveCalendarItem";
-import { ILeaveType } from "../../model/ILeaveType";
-import { IFormFields } from "../../model/IFormFields";
-import { IPeriod } from "../../model/IPeriod";
+import { ILeaveType } from "../../../../models/ILeaveType";
+import { IFormFields } from "../../../../models/IFormFields";
+import { IPeriod } from "../../../../models/IPeriod";
 
 export interface ILeaveCalendarComponentProps{
     date: Date;

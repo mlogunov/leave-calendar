@@ -21,6 +21,7 @@ define([], function() {
     "EndDateLabelText": "End date",
     "LeaveTypeLabelText": "Leave type",
     "SaveButtonText": "Save",
-    "CancelButtonText": "Cancel"
+    "CancelButtonText": "Cancel",
+    "ErrorMessage": "Sorry, something went wrong"
   }
 });

@@ -21,6 +21,7 @@ declare interface ILeaveCalendarWebPartStrings {
   SaveButtonText: string;
   CancelButtonText:string;
   RequiredErrorMessage: string;
+  ErrorMessage: string;
 }
 
 declare module 'LeaveCalendarWebPartStrings' {

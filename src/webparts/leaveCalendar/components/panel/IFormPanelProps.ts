@@ -1,7 +1,6 @@
-import { ILeaveType } from "../../model/ILeaveType";
-import { FormEvent } from "react";
-import { IPeriod } from "../../model/IPeriod";
-import { IFormFields } from "../../model/IFormFields";
+import { ILeaveType } from "../../../../models/ILeaveType";
+import { IPeriod } from "../../../../models/IPeriod";
+import { IFormFields } from "../../../../models/IFormFields";
 
 export interface IFormPanelProps {
     showPanel: boolean;

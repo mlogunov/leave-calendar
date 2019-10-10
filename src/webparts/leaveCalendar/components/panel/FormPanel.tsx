@@ -3,8 +3,8 @@ import { IFormPanelProps } from './IFormPanelProps';
 import { Panel, PanelType, Dropdown, DefaultButton, PrimaryButton, IDropdownOption, Label, MessageBar, MessageBarType } from 'office-ui-fabric-react';
 import * as strings from 'LeaveCalendarWebPartStrings';
 import { DatePicker, DayOfWeek, IDatePickerStrings } from 'office-ui-fabric-react';
-import { ILeaveType } from '../../model/ILeaveType';
-import { IFormFields } from '../../model/IFormFields';
+import { ILeaveType } from '../../../../models/ILeaveType';
+import { IFormFields } from '../../../../models/IFormFields';
 interface IDropdownOptions {
     text: string;
     key: number;

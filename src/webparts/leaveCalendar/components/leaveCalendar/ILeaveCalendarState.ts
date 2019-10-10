@@ -1,5 +1,5 @@
 import { ILeaveCalendarItem } from "./ILeaveCalendarItem";
-import { IPeriod } from "../../model/IPeriod";
+import { IPeriod } from "../../../../models/IPeriod";
 
 export interface ILeaveCalendarState {
     date: Date;
@@ -9,4 +9,6 @@ export interface ILeaveCalendarState {
     formData: IPeriod;
     isFormValid: boolean;
     isFormSubmitButtonDisabled: boolean;
+    hasError: boolean;
+    errorMessage: string;
 }

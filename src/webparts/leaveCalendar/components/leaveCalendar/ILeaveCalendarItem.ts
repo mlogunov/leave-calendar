@@ -1,5 +1,5 @@
-import { IPeriod } from "../../model/IPeriod";
-import { IEmployee } from "../../model/IEmployee";
+import { IPeriod } from "../../../../models/IPeriod";
+import { IEmployee } from "../../../../models/IEmployee";
 
 export interface ILeaveCalendarItem{
     id: number;

@@ -22,5 +22,6 @@ define([], function() {
       "LeaveTypeLabelText": "Тип отсутствия",
       "SaveButtonText": "Сохранить",
       "CancelButtonText": "Отмена",
+      "ErrorMessage": "К сожалению, что-то пошло не так"
     }
   });

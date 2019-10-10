@@ -3,23 +3,26 @@
     <ContentTypes>
       <ContentType ID="0x01">
         <FieldRefs>
-          <RemoveFieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" />
-          <FieldRef Name="DateFrom"/>
-          <FieldRef Name="DateTo"></FieldRef>
-          <FieldRef Name="LeaveType"></FieldRef>
+          <FieldRef Name="Title" />
+          <FieldRef Name="DateFrom" />
+          <FieldRef Name="DateTo" />
+          <FieldRef Name="LeaveType" />
         </FieldRefs>
       </ContentType>
     </ContentTypes>
     <Fields>
+      <Field  ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" 
+              Name="Title" 
+              Type="Text" 
+              Required="FALSE" />
       <Field  ID="{2FCADA70-647A-4A0C-9DB0-19F51392AF79}"
-            Type="DateTime"
-            Format="DateOnly"
-            Name="DateFrom"
-            DisplayName="Date From"
-            Required="TRUE"
-            EnforceUniqueValues="FALSE"
-            Indexed="TRUE" >
-      </Field>
+              Type="DateTime"
+              Format="DateOnly"
+              Name="DateFrom"
+              DisplayName="Date From"
+              Required="TRUE"
+              EnforceUniqueValues="FALSE"
+              Indexed="TRUE" />
       <Field  ID="{1C71D162-A9B4-4B97-B22F-6307065DE480}"
               Type="DateTime"
               Format="DateOnly"
@@ -27,16 +30,14 @@
               DisplayName="Date To"
               Required="TRUE"
               EnforceUniqueValues="FALSE"
-              Indexed="TRUE" >
-      </Field>
+              Indexed="TRUE" />
       <Field  ID="{A430ABAE-F74A-43BF-84A1-E7EEDB884100}"
               Type="Lookup"
-              List="Leave Types"
+              List="Lists/LeaveTypes"
               ShowField="Title"
               Name="LeaveType"
-              DisplayName="Leave Type"
-              Required="TRUE" >
-      </Field>
+              DisplayName="Leave Types"
+              Required="TRUE" />
     </Fields>
     <Views>
       <View BaseViewID="1" Type="HTML" WebPartZoneID="Main" DisplayName="$Resources:core,objectiv_schema_mwsidcamlidC24;" DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" SetupPath="pages\viewpage.aspx" ImageUrl="/_layouts/images/generic.png" Url="AllItems.aspx">

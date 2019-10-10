@@ -1,6 +1,6 @@
-import { IListItem } from "./model/IListItem";
-import { ILeaveType } from "./model/ILeaveType";
-import { IEmployee } from "./model/IEmployee";
+import { IListItem } from "../models/IListItem";
+import { ILeaveType } from "../models/ILeaveType";
+import { IEmployee } from "../models/IEmployee";
 import * as _ from 'lodash';
 
 export default class MockHttpClient {

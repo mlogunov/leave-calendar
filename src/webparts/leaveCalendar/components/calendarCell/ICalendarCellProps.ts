@@ -1,4 +1,4 @@
-import { ILeaveType } from "../../model/ILeaveType";
+import { ILeaveType } from "../../../../models/ILeaveType";
 
 export interface ICalendarCellProps{
     value: number | string;
