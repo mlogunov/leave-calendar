@@ -21,7 +21,10 @@ export const LeaveCalendarComponent: React.StatelessComponent<ILeaveCalendarComp
         const weekend: boolean = day == 6 || day == 0;
         days.push(<CalendarCell key={i} value={strings.ShortDays[day]} weekend={weekend} />);
     }  
-    const groups = _.groupBy(props.items, (item: ILeaveCalendarItem) => item.id);
+    const groups: any = _.groupBy(props.items, (item: ILeaveCalendarItem) => item.id);
+    const groupsArray: ILeaveCalendarItem[][] = Object.keys(groups).map((key: string) => {return groups[key]}).sort(
+        (a: ILeaveCalendarItem[], b: ILeaveCalendarItem[]) => 
+        (a[0].employee.title > b[0].employee.title) ? 1 : ((b[0].employee.title > a[0].employee.title) ? -1:0));
     if(props.loading){
         rows.push(
             <div key={1} className={styles.spinner}>
@@ -30,15 +33,16 @@ export const LeaveCalendarComponent: React.StatelessComponent<ILeaveCalendarComp
         );
     }
     else if(props.items.length > 0) {
-        rows = Object.keys(groups).map((key: string, index: number): JSX.Element=>{
+        rows = groupsArray.map((group: ILeaveCalendarItem[]): JSX.Element=>{
             let cells:JSX.Element[] = [];
-            const primaryText: string = groups[key][0].employee.title;
-            const secondaryText: string = groups[key][0].employee.position;
+            const emplId: number = group[0].employee.id;
+            const primaryText: string = group[0].employee.title;
+            const secondaryText: string = group[0].employee.position;
             for(let i: number = 1; i <= daysInMonth; i++){
                 const date: Date = new Date(props.date.getFullYear(), props.date.getMonth(), i);
                 const day: number = date.getDay();
                 const weekend: boolean = day == 6 || day == 0;
-                const filter = groups[key].filter((item: ILeaveCalendarItem) => item.leave.dateFrom <= date && date <= item.leave.dateTo)  
+                const filter = group.filter((item: ILeaveCalendarItem) => item.leave.dateFrom <= date && date <= item.leave.dateTo)  
                 if(filter && filter.length > 0){
                     const leaveType: ILeaveType = props.leaveTypes.filter((type: ILeaveType) => type.id == filter[0].leave.leaveTypeId)[0];
                     cells.push(<CalendarCell key={i} value={i} weekend={weekend} leaveType={leaveType}/>);
@@ -48,7 +52,7 @@ export const LeaveCalendarComponent: React.StatelessComponent<ILeaveCalendarComp
             }
     
             return (
-                <div className={styles.calendarRow} key={index}>
+                <div className={styles.calendarRow} key={emplId}>
                     <div>
                     <Persona primaryText={primaryText} secondaryText={secondaryText} size={PersonaSize.size32} showSecondaryText={true} />
                     </div>
