@@ -1,5 +1,5 @@
 import {WebPartContext} from '@microsoft/sp-webpart-base';
-import { sp } from "@pnp/sp";
+import { sp, WebEnsureUserResult } from "@pnp/sp";
 import { IListItem } from '../models/IListItem';
 import { ILeaveType } from '../models/ILeaveType';
 import { IEmployee } from '../models/IEmployee';
@@ -9,6 +9,17 @@ export default class SPServices {
         sp.setup({
             spfxContext: this.context
         })
+    }
+
+    public async getUserId(loginName: string): Promise<number> {
+        try{
+            const user: WebEnsureUserResult = await sp.web.ensureUser(loginName);
+            return user.data.Id
+        }
+        catch(error){
+            console.dir(error);
+            return Promise.reject(error);
+        }
     }
 
     public async getLeaveCalendarListItems(startDate: string, endDate: string): Promise<IListItem[]> {
@@ -67,6 +78,32 @@ export default class SPServices {
                   LeaveTypeId: leaveTypeId
                 }
               )
+        }
+        catch(error){
+            console.dir(error);
+            return Promise.reject(error);
+        }
+    }
+
+    public async updateItem(id: number, dateFrom: Date, dateTo: Date, leaveTypeId: number): Promise<any> {
+        try{
+            await sp.web.lists.getByTitle('Leave Calendar').items.getById(id).update(
+                {
+                  DateFrom: dateFrom,
+                  DateTo: dateTo,
+                  LeaveTypeId: leaveTypeId
+                }
+              )
+        }
+        catch(error){
+            console.dir(error);
+            return Promise.reject(error);
+        }
+    }
+
+    public async deleteItem(id: number): Promise<any> {
+        try{
+            await sp.web.lists.getByTitle('Leave Calendar').items.getById(id).delete();
         }
         catch(error){
             console.dir(error);

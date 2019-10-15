@@ -19,9 +19,9 @@ export const LeaveCalendarComponent: React.StatelessComponent<ILeaveCalendarComp
     for(let i: number = 1; i <= daysInMonth; i++){
         const day: number = new Date(props.date.getFullYear(), props.date.getMonth(), i).getDay();
         const weekend: boolean = day == 6 || day == 0;
-        days.push(<CalendarCell key={i} value={strings.ShortDays[day]} weekend={weekend} />);
+        days.push(<CalendarCell key={i} value={strings.ShortDays[day]} weekend={weekend} isButton={false} />);
     }  
-    const groups: any = _.groupBy(props.items, (item: ILeaveCalendarItem) => item.id);
+    const groups: any = _.groupBy(props.items, (item: ILeaveCalendarItem) => item.employee.id);
     const groupsArray: ILeaveCalendarItem[][] = Object.keys(groups).map((key: string) => {return groups[key]}).sort(
         (a: ILeaveCalendarItem[], b: ILeaveCalendarItem[]) => 
         (a[0].employee.title > b[0].employee.title) ? 1 : ((b[0].employee.title > a[0].employee.title) ? -1:0));
@@ -42,13 +42,21 @@ export const LeaveCalendarComponent: React.StatelessComponent<ILeaveCalendarComp
                 const date: Date = new Date(props.date.getFullYear(), props.date.getMonth(), i);
                 const day: number = date.getDay();
                 const weekend: boolean = day == 6 || day == 0;
-                const filter = group.filter((item: ILeaveCalendarItem) => item.leave.dateFrom <= date && date <= item.leave.dateTo)  
+                const filter: ILeaveCalendarItem[] = group.filter((item: ILeaveCalendarItem) => item.leave.dateFrom <= date && date <= item.leave.dateTo);
                 if(filter && filter.length > 0){
+                    const item = filter[0];
                     const leaveType: ILeaveType = props.leaveTypes.filter((type: ILeaveType) => type.id == filter[0].leave.leaveTypeId)[0];
-                    cells.push(<CalendarCell key={i} value={i} weekend={weekend} leaveType={leaveType}/>);
+                    cells.push(<CalendarCell key={i} 
+                                             value={i} 
+                                             weekend={weekend} 
+                                             item={item} 
+                                             leaveType={leaveType}
+                                             isButton={emplId == props.currentUserId} 
+                                             onEditClick={()=>props.onShowPanel(item.id)}
+                                             onDeleteClick={()=>props.onDeleteItem(item.id)} />);
                 }
                 else
-                    cells.push(<CalendarCell key={i} value={i} weekend={weekend} />);
+                    cells.push(<CalendarCell key={i} value={i} weekend={weekend} isButton={false} />);
             }
     
             return (
@@ -74,7 +82,7 @@ export const LeaveCalendarComponent: React.StatelessComponent<ILeaveCalendarComp
         <div className={styles.leaveCalendar}>
             <div className={styles.container}>
                 <div className={styles.commandBar}>
-                    <CommandBarButton iconProps={{iconName: 'Add'}} text={strings.NewItemText} onClick={props.onShowPanel} />
+                    <CommandBarButton iconProps={{iconName: 'Add'}} text={strings.ButtonNames.NewItem} onClick={()=>props.onShowPanel()} />
                 </div>
                 <div className={styles.calendarBody}>
                     <div className={styles.calendarRow}>

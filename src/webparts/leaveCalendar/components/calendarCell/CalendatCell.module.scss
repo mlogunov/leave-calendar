@@ -1,4 +1,9 @@
+// variables.scss
+$weekend-background-color: #f5f5f5;
 
+:export{
+  weekendBgColor: $weekend-background-color;
+}
 .calendarCell{
     flex-basis: 24px;
     flex-grow: 1; 
@@ -9,4 +14,20 @@
         justify-content: center;
         align-items: center;
     }
+}
+
+.actionButton{
+  width: 100%;
+  padding: 0;
+  border: none;
+  color: inherit;
+  &>div {
+    justify-content: center;
+    &>i{
+      display: none;
+    }
+  }  
+}
+.actionButton:hover{
+  color: inherit;
 }

@@ -4,15 +4,17 @@ import { IFormFields } from "../../../../models/IFormFields";
 import { IPeriod } from "../../../../models/IPeriod";
 
 export interface ILeaveCalendarComponentProps{
+    currentUserId: number;
     date: Date;
     items: ILeaveCalendarItem[];
     leaveTypes?: ILeaveType[];
     onDateChange(date: Date): void;
     loading: boolean;
     showPanel: boolean;
-    onShowPanel(): void;
+    onShowPanel(id?: number): void;
     onHidePanel(): void;
     onSubmitPanel(): void;
+    onDeleteItem(id: number): void;
     onFormDataChange(value: Date | number, field: IFormFields): void;
     formValue: IPeriod;
     isFormValid: boolean;

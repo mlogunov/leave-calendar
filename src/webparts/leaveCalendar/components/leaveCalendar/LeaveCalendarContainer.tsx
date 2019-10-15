@@ -16,8 +16,9 @@ import { MessageBar, MessageBarType } from 'office-ui-fabric-react';
 import {ErrorMessage} from 'LeaveCalendarWebPartStrings';
 
 
-export default class LeaveCalendar extends React.Component < ILeaveCalendarProps, ILeaveCalendarState > {
-  private _spService: SPServices = null;
+export default class LeaveCalendarContainer extends React.Component < ILeaveCalendarProps, ILeaveCalendarState > {
+  private _currentUserId: number;
+  private _spService: SPServices;
   private _leaveTypes: ILeaveType[] = [];
   constructor(props: ILeaveCalendarProps){
     super(props);
@@ -38,6 +39,7 @@ export default class LeaveCalendar extends React.Component < ILeaveCalendarProps
     this._showPanel = this._showPanel.bind(this);
     this._hidePanel = this._hidePanel.bind(this);
     this._onSubmitPanel = this._onSubmitPanel.bind(this);
+    this._onDeleteItem = this._onDeleteItem.bind(this);
   }
 
   private _onDateChanged(newDate: Date): void {
@@ -47,26 +49,39 @@ export default class LeaveCalendar extends React.Component < ILeaveCalendarProps
     switch(field){
       case IFormFields.dateFrom:
         this.setState((prevState)=>{
-          return {formData: {dateFrom: value, dateTo: prevState.formData.dateTo, leaveTypeId: prevState.formData.leaveTypeId}}
+          return {formData: {dateFrom: value, dateTo: prevState.formData.dateTo, leaveTypeId: prevState.formData.leaveTypeId, itemId: prevState.formData.itemId}}
         });
         break;
       case IFormFields.dateTo:
         this.setState((prevState)=>{
-          return {formData: {dateFrom: prevState.formData.dateFrom, dateTo: value, leaveTypeId: prevState.formData.leaveTypeId}}
+          return {formData: {dateFrom: prevState.formData.dateFrom, dateTo: value, leaveTypeId: prevState.formData.leaveTypeId, itemId: prevState.formData.itemId}}
         });
         break;
       case IFormFields.leaveType:
         this.setState((prevState)=>{
-          return {formData: {dateFrom: prevState.formData.dateFrom, dateTo: prevState.formData.dateTo, leaveTypeId: value}}
+          return {formData: {dateFrom: prevState.formData.dateFrom, dateTo: prevState.formData.dateTo, leaveTypeId: value, itemId: prevState.formData.itemId}}
         });
         break;
     }
   }
-  private _showPanel(): void {
-    this.setState({showPanel: true})
+  private _showPanel(id?: number): void {
+    if(id){
+      const item: ILeaveCalendarItem = {...this.state}.items.filter((item: ILeaveCalendarItem) => item.id == id)[0];
+      this.setState({
+        showPanel: true,
+        formData: {dateFrom: item.leave.dateFrom, dateTo: item.leave.dateTo, leaveTypeId: item.leave.leaveTypeId, itemId: item.id}
+      });
+    }
+    else{
+      this.setState({showPanel: true})
+    }
   }
   private _hidePanel(): void {
-    this.setState({showPanel: false})
+    this.setState({
+      showPanel: false,
+      isFormValid: true,
+      formData: {dateFrom: null, dateTo: null, leaveTypeId: null, itemId: undefined},
+    })
   }
   private async _onSubmitPanel(): Promise<void> {
     this.setState({isFormSubmitButtonDisabled: true});
@@ -77,12 +92,18 @@ export default class LeaveCalendar extends React.Component < ILeaveCalendarProps
         const dateFrom: Date = this.state.formData.dateFrom;
         const dateTo: Date = this.state.formData.dateTo;
         const leaveTypeId: number = this.state.formData.leaveTypeId;
-        await this._spService.addNewItem(dateFrom, dateTo, leaveTypeId);
+        const itemId: number = this.state.formData.itemId;
+        if(itemId){
+          await this._spService.updateItem(itemId, dateFrom, dateTo, leaveTypeId);
+        }
+        else{
+          await this._spService.addNewItem(dateFrom, dateTo, leaveTypeId);
+        }
         this.setState(
           {
             showPanel: false, 
             isFormValid: true, 
-            formData: {dateFrom: null, dateTo: null, leaveTypeId: null},
+            formData: {dateFrom: null, dateTo: null, leaveTypeId: null, itemId: undefined},
             isFormSubmitButtonDisabled: false
           }, ()=>this._getData());
       }
@@ -102,6 +123,19 @@ export default class LeaveCalendar extends React.Component < ILeaveCalendarProps
 
   }
 
+  private async _onDeleteItem(id: number): Promise<void> {
+    try{
+      await this._spService.deleteItem(id);
+      this._getData();
+    }
+    catch(error){
+      this.setState({ 
+        hasError: true, 
+        errorMessage: error.message
+      });
+    }
+  }
+
   private async _getData(): Promise<void> {
     this.setState({loading: true});
     try {
@@ -111,12 +145,13 @@ export default class LeaveCalendar extends React.Component < ILeaveCalendarProps
       if (Environment.type === EnvironmentType.Local) {
         listItems = await MockHttpClient.getItems();
         this._leaveTypes = await MockHttpClient.getLeaveTypes();
+        this._currentUserId = await MockHttpClient.getUserId();
 
         if(listItems && listItems.length > 0){
           for(const item of listItems){
             leaveCalendarItems.push(
               {
-                id: item.authorId,
+                id: item.id,
                 employee: await MockHttpClient.getEmployeeById(item.authorId),
                 leave: {dateFrom: item.dateFrom, dateTo: item.dateTo, leaveTypeId: item.leaveTypeId}
               }
@@ -130,12 +165,13 @@ export default class LeaveCalendar extends React.Component < ILeaveCalendarProps
         const endDate: string = new Date(this.state.date.getFullYear(), this.state.date.getMonth() + 1, 0).toISOString();
         listItems = await this._spService.getLeaveCalendarListItems(startDate, endDate);
         this._leaveTypes = await this._spService.getLeaveTypesListItems();
+        this._currentUserId = await this._spService.getUserId(this.props.context.pageContext.user.loginName);
 
         if(listItems && listItems.length > 0){
           for(const item of listItems){
             leaveCalendarItems.push(
               {
-                id: item.authorId,
+                id: item.id,
                 employee: await this._spService.getEmployeeById(item.authorId),
                 leave: {dateFrom: item.dateFrom, dateTo: item.dateTo, leaveTypeId: item.leaveTypeId}
               }
@@ -168,6 +204,7 @@ export default class LeaveCalendar extends React.Component < ILeaveCalendarProps
       :
       // show Calendar
       <LeaveCalendarComponent 
+        currentUserId={this._currentUserId}
         date={this.state.date}
         onDateChange = {this._onDateChanged}
         items = {this.state.items}
@@ -177,6 +214,7 @@ export default class LeaveCalendar extends React.Component < ILeaveCalendarProps
         onShowPanel = {this._showPanel}
         onHidePanel = {this._hidePanel}
         onSubmitPanel = {this._onSubmitPanel}
+        onDeleteItem = {this._onDeleteItem}
         onFormDataChange = {this._onFormDataChange}
         formValue = {this.state.formData}
         isFormValid = {this.state.isFormValid}

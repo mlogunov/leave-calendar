@@ -15,13 +15,17 @@ define([], function() {
     "DatePickerPlaceholder": "Select a date...",
     "RequiredErrorMessage" : "Please complete all required fields",
     "NoResultsMessage": "No results found",
-    "NewItemText": "New",
+    "ButtonNames": {
+      "NewItem": "New",
+      "Save": "Save",
+      "Edit": "Edit",
+      "Delete": "Delete",
+      "Cancel": "Cancel"
+    },
     "FormPanelHeaderText": "Add leave",
     "StartDateLabelText": "Start date",
     "EndDateLabelText": "End date",
     "LeaveTypeLabelText": "Leave type",
-    "SaveButtonText": "Save",
-    "CancelButtonText": "Cancel",
     "ErrorMessage": "Sorry, something went wrong"
   }
 });

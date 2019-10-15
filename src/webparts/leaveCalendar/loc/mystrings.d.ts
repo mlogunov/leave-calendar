@@ -13,13 +13,17 @@ declare interface ILeaveCalendarWebPartStrings {
   NextYearAriaLabel: string,
   DatePickerPlaceholder: string,
   NoResultsMessage: string;
-  NewItemText: string;
+  ButtonNames: {
+    NewItem: string,
+    Save: string,
+    Edit: string,
+    Delete: string,
+    Cancel: string;
+  };
   FormPanelHeaderText: string;
   StartDateLabelText: string;
   EndDateLabelText: string;
   LeaveTypeLabelText: string;
-  SaveButtonText: string;
-  CancelButtonText:string;
   RequiredErrorMessage: string;
   ErrorMessage: string;
 }

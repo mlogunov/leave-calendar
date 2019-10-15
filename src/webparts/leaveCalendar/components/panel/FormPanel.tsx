@@ -5,6 +5,8 @@ import * as strings from 'LeaveCalendarWebPartStrings';
 import { DatePicker, DayOfWeek, IDatePickerStrings } from 'office-ui-fabric-react';
 import { ILeaveType } from '../../../../models/ILeaveType';
 import { IFormFields } from '../../../../models/IFormFields';
+import { formatDate } from '../../../../utils/dateUtils';
+
 interface IDropdownOptions {
     text: string;
     key: number;
@@ -34,10 +36,10 @@ export const FormPanel: React.StatelessComponent<IFormPanelProps> = (props: IFor
         return (
           <div>
             <PrimaryButton style={{ marginRight: '8px' }} onClick={props.onSubmit} disabled={props.isSubmitButtonDisabled}>
-                {strings.SaveButtonText}
+                {strings.ButtonNames.Save}
             </PrimaryButton>
             <DefaultButton onClick={props.onHidePanel}>
-                {strings.CancelButtonText}
+                {strings.ButtonNames.Cancel}
             </DefaultButton>
           </div>
         );
@@ -56,7 +58,7 @@ export const FormPanel: React.StatelessComponent<IFormPanelProps> = (props: IFor
                         strings={DayPickerStrings} 
                         showMonthPickerAsOverlay={true} 
                         placeholder={strings.DatePickerPlaceholder} 
-                        formatDate={_onFormatDate}
+                        formatDate={formatDate}
                         showGoToToday={false}
                         onSelectDate={(date: Date) =>props.onDataChange(date, IFormFields.dateFrom)}
                         value={props.value.dateFrom}

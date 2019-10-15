@@ -16,12 +16,17 @@ define([], function() {
       "RequiredErrorMessage" : "Пожалуйста, заполните все обязательные поля",
       "NoResultsMessage": "Записей не найдено",
       "NewItemText": "Создать",
+      "ButtonNames": {
+        "NewItem": "Создать",
+        "Save": "Сохранить",
+        "Edit": "Изменить",
+        "Delete": "Удалить",
+        "Cancel": "Отмена"
+      },
       "FormPanelHeaderText": "Новая запись",
       "StartDateLabelText": "Дата начала",
       "EndDateLabelText": "Дата окончания",
       "LeaveTypeLabelText": "Тип отсутствия",
-      "SaveButtonText": "Сохранить",
-      "CancelButtonText": "Отмена",
       "ErrorMessage": "К сожалению, что-то пошло не так"
     }
   });
