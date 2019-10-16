@@ -56,13 +56,35 @@ $screen: 1168px;
     max-width: 1284px;
     margin: 0px auto;
   }
+  .legend{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    &>div{
+      display: flex;
+      flex-wrap: nowrap;
+      margin-right: 20px;
+      align-items: center;
+      min-height: 22px;
+      padding:0 0 5px 0;
+      &>div{
+        width: 28px;
+        height: 100%;
+        margin-right: 10px;
+      }
+    }
+  }
   .commandBar{
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
     flex-wrap: nowrap;
     width: auto;
     height: 44px;
-    padding: 5px 0;
+    padding:0 0 5px 0;
+    .searchBox{
+      width: 300px;
+    }
   }
   .calendar {
     width: 100%;

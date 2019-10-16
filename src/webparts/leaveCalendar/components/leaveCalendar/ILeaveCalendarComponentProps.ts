@@ -6,8 +6,9 @@ import { IPeriod } from "../../../../models/IPeriod";
 export interface ILeaveCalendarComponentProps{
     currentUserId: number;
     date: Date;
+    filter: string;
     items: ILeaveCalendarItem[];
-    leaveTypes?: ILeaveType[];
+    leaveTypes: ILeaveType[];
     onDateChange(date: Date): void;
     loading: boolean;
     showPanel: boolean;
@@ -16,6 +17,7 @@ export interface ILeaveCalendarComponentProps{
     onSubmitPanel(): void;
     onDeleteItem(id: number): void;
     onFormDataChange(value: Date | number, field: IFormFields): void;
+    onFilterChange(newValue: string): void;
     formValue: IPeriod;
     isFormValid: boolean;
     isFormSubmitButtonDisabled: boolean;

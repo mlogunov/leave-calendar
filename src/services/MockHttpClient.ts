@@ -95,7 +95,7 @@ export default class MockHttpClient {
         }
     ];
 
-    public static getUserId(): Promise<number> {
+    public static getCurrentUserId(): Promise<number> {
         return new Promise<number>((resolve) => {
             resolve(this._currentUserID)
         })

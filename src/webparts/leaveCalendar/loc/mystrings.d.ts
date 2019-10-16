@@ -26,6 +26,7 @@ declare interface ILeaveCalendarWebPartStrings {
   LeaveTypeLabelText: string;
   RequiredErrorMessage: string;
   ErrorMessage: string;
+  FilterPlaceholderText: string;
 }
 
 declare module 'LeaveCalendarWebPartStrings' {

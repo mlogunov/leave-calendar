@@ -25,6 +25,7 @@ export default class LeaveCalendarContainer extends React.Component < ILeaveCale
     this.state = {
         date: new Date(new Date().getFullYear(), new Date().getMonth()),
         items: [],
+        filter: '',
         loading: false,
         showPanel: false,
         formData: {dateFrom: null, dateTo: null, leaveTypeId: null},
@@ -40,6 +41,7 @@ export default class LeaveCalendarContainer extends React.Component < ILeaveCale
     this._hidePanel = this._hidePanel.bind(this);
     this._onSubmitPanel = this._onSubmitPanel.bind(this);
     this._onDeleteItem = this._onDeleteItem.bind(this);
+    this._onFilterChange = this._onFilterChange.bind(this);
   }
 
   private _onDateChanged(newDate: Date): void {
@@ -64,6 +66,11 @@ export default class LeaveCalendarContainer extends React.Component < ILeaveCale
         break;
     }
   }
+
+  private _onFilterChange(newValue: string): void {
+    this.setState({filter: newValue})
+  }
+
   private _showPanel(id?: number): void {
     if(id){
       const item: ILeaveCalendarItem = {...this.state}.items.filter((item: ILeaveCalendarItem) => item.id == id)[0];
@@ -136,6 +143,34 @@ export default class LeaveCalendarContainer extends React.Component < ILeaveCale
     }
   }
 
+  private async _getLeaveTypes(): Promise<ILeaveType[]> {
+    try{
+      if (Environment.type === EnvironmentType.Local) {
+        return await MockHttpClient.getLeaveTypes();
+      }
+      else if (Environment.type == EnvironmentType.SharePoint || Environment.type == EnvironmentType.ClassicSharePoint) {
+        return await this._spService.getLeaveTypesListItems();
+      }
+    }
+    catch(error){
+      this.setState({ hasError: true, errorMessage: error.message, loading: false });
+    }
+  }
+
+  private async _getCurrentUserId(): Promise<number> {
+    try{
+      if (Environment.type === EnvironmentType.Local) {
+        return await MockHttpClient.getCurrentUserId();
+      }
+      else if (Environment.type == EnvironmentType.SharePoint || Environment.type == EnvironmentType.ClassicSharePoint) {
+        return await this._spService.getCurrentUserId();
+      }
+    }
+    catch(error){
+      this.setState({ hasError: true, errorMessage: error.message, loading: false });
+    }
+  }
+
   private async _getData(): Promise<void> {
     this.setState({loading: true});
     try {
@@ -144,8 +179,6 @@ export default class LeaveCalendarContainer extends React.Component < ILeaveCale
       // Local environment
       if (Environment.type === EnvironmentType.Local) {
         listItems = await MockHttpClient.getItems();
-        this._leaveTypes = await MockHttpClient.getLeaveTypes();
-        this._currentUserId = await MockHttpClient.getUserId();
 
         if(listItems && listItems.length > 0){
           for(const item of listItems){
@@ -164,8 +197,6 @@ export default class LeaveCalendarContainer extends React.Component < ILeaveCale
         const startDate: string = this.state.date.toISOString();
         const endDate: string = new Date(this.state.date.getFullYear(), this.state.date.getMonth() + 1, 0).toISOString();
         listItems = await this._spService.getLeaveCalendarListItems(startDate, endDate);
-        this._leaveTypes = await this._spService.getLeaveTypesListItems();
-        this._currentUserId = await this._spService.getUserId(this.props.context.pageContext.user.loginName);
 
         if(listItems && listItems.length > 0){
           for(const item of listItems){
@@ -187,13 +218,19 @@ export default class LeaveCalendarContainer extends React.Component < ILeaveCale
     }
 
   }
-  public componentDidMount() {
+  public async componentDidMount() {
+    this.setState({loading: true});
+    this._leaveTypes = await this._getLeaveTypes();
+    this._currentUserId = await this._getCurrentUserId();
     this._getData();
   }
   public componentWillUnmount() {
 
   }
   public render(): React.ReactElement<ILeaveCalendarProps> {
+    const filteredItems: ILeaveCalendarItem[] = this.state.items.filter((item: ILeaveCalendarItem) => {
+      return item.employee.title.toLowerCase().indexOf(this.state.filter.toLowerCase()) !== -1
+    });
     return(
       // test if has errors
       this.state.hasError ?
@@ -207,7 +244,9 @@ export default class LeaveCalendarContainer extends React.Component < ILeaveCale
         currentUserId={this._currentUserId}
         date={this.state.date}
         onDateChange = {this._onDateChanged}
-        items = {this.state.items}
+        filter = {this.state.filter}
+        onFilterChange = {this._onFilterChange}
+        items = {filteredItems}
         leaveTypes = {this._leaveTypes}
         loading = {this.state.loading}
         showPanel = {this.state.showPanel}

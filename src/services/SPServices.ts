@@ -11,6 +11,17 @@ export default class SPServices {
         })
     }
 
+    public async getCurrentUserId(): Promise<number> {
+        try{
+            const user: WebEnsureUserResult = await sp.web.ensureUser(this.context.pageContext.user.loginName);
+            return user.data.Id
+        }
+        catch(error){
+            console.dir(error);
+            return Promise.reject(error);
+        }
+    }
+
     public async getUserId(loginName: string): Promise<number> {
         try{
             const user: WebEnsureUserResult = await sp.web.ensureUser(loginName);

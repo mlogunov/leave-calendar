@@ -26,6 +26,7 @@ define([], function() {
     "StartDateLabelText": "Start date",
     "EndDateLabelText": "End date",
     "LeaveTypeLabelText": "Leave type",
-    "ErrorMessage": "Sorry, something went wrong"
+    "ErrorMessage": "Sorry, something went wrong",
+    "FilterPlaceholderText": "Filter"
   }
 });

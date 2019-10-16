@@ -1,10 +1,10 @@
 import * as React from 'react';
 import styles from './LeaveCalendarComponent.module.scss';
 import * as strings from 'LeaveCalendarWebPartStrings';
-import { escape } from '@microsoft/sp-lodash-subset';
 import { ILeaveCalendarComponentProps } from './ILeaveCalendarComponentProps';
 import { MonthPicker } from '../monthPicker/MonthPicker';
-import { Persona, PersonaSize, Image, IPersonaProps, Spinner, SpinnerSize, CommandBarButton } from 'office-ui-fabric-react';
+import { Persona, PersonaSize, Spinner, SpinnerSize, CommandBarButton } from 'office-ui-fabric-react';
+import { SearchBox } from 'office-ui-fabric-react/lib/SearchBox';
 import { CalendarCell } from '../calendarCell/CalendarCell';
 import { ILeaveCalendarItem } from './ILeaveCalendarItem';
 import * as _ from 'lodash';
@@ -12,7 +12,14 @@ import { ILeaveType } from '../../../../models/ILeaveType';
 import { FormPanel } from '../panel/FormPanel';
 
 export const LeaveCalendarComponent: React.StatelessComponent<ILeaveCalendarComponentProps> = (props: ILeaveCalendarComponentProps): React.ReactElement<ILeaveCalendarComponentProps> => {
-
+    const legend:JSX.Element[] = props.leaveTypes.map((leaveType: ILeaveType): JSX.Element => {
+        return (
+            <div key={leaveType.id}>
+                <div style={{background: leaveType.bgColor}}></div>
+                <span>{leaveType.title}</span>
+            </div>
+        )
+    });
     let days:JSX.Element[] = [];
     let rows: JSX.Element[] = [];
     const daysInMonth: number = new Date(props.date.getFullYear(), props.date.getMonth() + 1, 0).getDate();
@@ -81,8 +88,19 @@ export const LeaveCalendarComponent: React.StatelessComponent<ILeaveCalendarComp
     return (
         <div className={styles.leaveCalendar}>
             <div className={styles.container}>
+                
                 <div className={styles.commandBar}>
-                    <CommandBarButton iconProps={{iconName: 'Add'}} text={strings.ButtonNames.NewItem} onClick={()=>props.onShowPanel()} />
+                    <CommandBarButton iconProps={{iconName: 'Add'}} 
+                                        text={strings.ButtonNames.NewItem} 
+                                        onClick={()=>props.onShowPanel()} />
+                    <SearchBox labelText={strings.FilterPlaceholderText} 
+                                underlined={true} 
+                                className={styles.searchBox} 
+                                onChange={props.onFilterChange} 
+                                value={props.filter} />
+                </div>
+                <div className={styles.legend}>
+                    {legend}
                 </div>
                 <div className={styles.calendarBody}>
                     <div className={styles.calendarRow}>
