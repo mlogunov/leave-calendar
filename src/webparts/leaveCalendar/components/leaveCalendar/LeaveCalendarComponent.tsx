@@ -52,7 +52,7 @@ export const LeaveCalendarComponent: React.StatelessComponent<ILeaveCalendarComp
                 const filter: ILeaveCalendarItem[] = group.filter((item: ILeaveCalendarItem) => item.leave.dateFrom <= date && date <= item.leave.dateTo);
                 if(filter && filter.length > 0){
                     const item = filter[0];
-                    const leaveType: ILeaveType = props.leaveTypes.filter((type: ILeaveType) => type.id == filter[0].leave.leaveTypeId)[0];
+                    const leaveType: ILeaveType = props.leaveTypes.filter((type: ILeaveType) => type.id == item.leave.leaveTypeId)[0];
                     cells.push(<CalendarCell key={i} 
                                              value={i} 
                                              weekend={weekend} 

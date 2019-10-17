@@ -8,22 +8,22 @@ export default class MockHttpClient {
     private static _items: IListItem[] = [
         {
             id: 1, 
-            dateFrom: new Date(2019, 8, 1), 
-            dateTo: new Date(2019, 8, 5), 
+            dateFrom: new Date(2019, 8, 16), 
+            dateTo: new Date(2020, 8, 1), 
             authorId: 1,
-            leaveTypeId: 1
-        },
-        {
-            id: 2,  
-            dateFrom: new Date(2019, 8, 8), 
-            dateTo: new Date(2019, 8, 15), 
-            authorId: 2,
             leaveTypeId: 4
         },
         {
+            id: 2,  
+            dateFrom: new Date(2019, 8, 2), 
+            dateTo: new Date(2019, 8, 15), 
+            authorId: 2,
+            leaveTypeId: 1
+        },
+        {
             id: 3, 
-            dateFrom: new Date(2019, 8, 9), 
-            dateTo: new Date(2019, 8, 22), 
+            dateFrom: new Date(2019, 8, 17), 
+            dateTo: new Date(2019, 8, 19), 
             authorId: 3,
             leaveTypeId: 3
         },
@@ -44,30 +44,37 @@ export default class MockHttpClient {
         {
             id: 6,  
             dateFrom: new Date(2019, 8, 16), 
-            dateTo: new Date(2019, 8, 20), 
+            dateTo: new Date(2019, 8, 22), 
             authorId: 4,
+            leaveTypeId: 1
+        },
+        {
+            id: 7,  
+            dateFrom: new Date(2019, 8, 23), 
+            dateTo: new Date(2019, 8, 29), 
+            authorId: 5,
             leaveTypeId: 1
         }
     ];
     private static _leaveTypes: ILeaveType[] = [
         {
             id: 1,
-            title: 'Отпуск',
+            title: ' Annual leave',
             bgColor: '#FFFACD'
         },
         {
             id: 2,
-            title: 'Обучение',
+            title: 'Study leave',
             bgColor: '#E6E6FA'
         },
         {
             id: 3,
-            title: 'Больничный',
+            title: 'Sick leave',
             bgColor: '#FFE4E1'
         },
         {
             id: 4,
-            title: 'Командировка',
+            title: 'Maternity/Paternity Leave',
             bgColor: '#B0E0E6'
         }
     ];
@@ -75,23 +82,28 @@ export default class MockHttpClient {
     private static _personas: IEmployee[] = [
         {
             id: 1,
-            title: 'Марушев Валерий Вячеславович',
-            position: 'Начальник управления'
+            title: 'Annie Lindqvist',
+            position: 'Designer'
         },
         {
             id: 2,
-            title: 'Орешин Антон Сергеевич',
-            position: 'Заместитель начальника управления'
+            title: 'Aaron Reid',
+            position: 'Designer'
         },
         {
             id: 3,
-            title: 'Абу Абдуллах Мухаммад ибн Муса аль-Хорезми',
-            position: 'Персидский математик'
+            title: 'Alex Lundberg',
+            position: 'Software Developer'
         },
         {
             id: 4,
-            title: 'Логунов Максим Владимирович',
-            position: 'Старший разработчик'
+            title: 'Roko Kolar',
+            position: 'Financial Analyst'
+        },
+        {
+            id: 5,
+            title: 'Christian Bergqvist',
+            position: 'Sr. Designer'
         }
     ];
 

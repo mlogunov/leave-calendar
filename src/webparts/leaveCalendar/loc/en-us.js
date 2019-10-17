@@ -27,6 +27,6 @@ define([], function() {
     "EndDateLabelText": "End date",
     "LeaveTypeLabelText": "Leave type",
     "ErrorMessage": "Sorry, something went wrong",
-    "FilterPlaceholderText": "Filter"
+    "FilterPlaceholderText": "Search"
   }
 });

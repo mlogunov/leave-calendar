@@ -28,6 +28,6 @@ define([], function() {
       "EndDateLabelText": "Дата окончания",
       "LeaveTypeLabelText": "Тип отсутствия",
       "ErrorMessage": "К сожалению, что-то пошло не так",
-      "FilterPlaceholderText": "Фильтр"
+      "FilterPlaceholderText": "Поиск"
     }
   });
