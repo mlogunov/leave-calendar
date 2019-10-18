@@ -6,7 +6,7 @@ A Web Part built using react that helps in time off tracking and attendance mana
 
 ## Web Part - Screenshot
 
-![leave-calendar](/assets/leavecalendar.png)
+![leave-calendar](./assets/LeaveCalendar.png)
 
 ## Used SharePoint Framework Version
 
